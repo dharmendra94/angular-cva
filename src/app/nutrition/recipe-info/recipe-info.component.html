@@ -1,0 +1,26 @@
+<div *ngIf="recipe$ | async as recipe" style="background: #e0e0e0;">
+  <div class="recipe-info-section">
+    <h1>{{ recipe.title }}</h1>
+    <img [src]="recipe.image" alt="Dish image" />
+    <div>Preparation time: {{ recipe.readyInMinutes }} minutes</div>
+    <div>Servings: {{ recipe.servings }}</div>
+    <div>
+      Instructions:
+      <div *ngFor="let instruction of recipe.analyzedInstructions">
+        <div *ngFor="let step of instruction.steps">
+          <div>Step: {{ step.number }}</div>
+          <div>
+            Ingredients:
+            <div *ngFor="let ingredient of step.ingredients">
+              {{ ingredient.name }}
+            </div>
+          </div>
+          <div>
+            Method:
+            {{ step.step }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,28 +1,37 @@
-<mat-grid-list cols="4">
-  <mat-grid-tile [colspan]="4" [rowspan]="1">
-    <form>
-      <mat-form-field style="width: 500px;">
-        <input
-          type="text"
-          placeholder="Search your favourite recipe"
-          matInput
-          [formControl]="recipeAutoComplete"
-          [matAutocomplete]="auto"
-        />
-        <mat-autocomplete
-          autoActiveFirstOption
-          #auto="matAutocomplete"
-          [displayWith]="recipeDisplayValue"
-          (optionSelected)="onRecipeSelect($event)"
+<form [@searchBarPosition]="isInitial ? 'initial': 'final'">
+  <div style="display: flex; justify-content: center;">
+    <mat-form-field style="width: 50%;">
+      <input
+        type="text"
+        placeholder="Search your favourite recipe"
+        matInput
+        [formControl]="recipeAutoComplete"
+        [matAutocomplete]="auto"
+      />
+
+      <mat-autocomplete
+        autoActiveFirstOption
+        #auto="matAutocomplete"
+        [displayWith]="recipeDisplayValue"
+        (optionSelected)="onRecipeSelect($event)"
+      >
+        <mat-option
+          *ngFor="let recipe of recipeAutoComplete$ | async"
+          [value]="recipe"
         >
-          <mat-option
-            *ngFor="let recipe of recipeAutoComplete$ | async"
-            [value]="recipe"
-          >
-            {{ recipe.title }}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-  </mat-grid-tile>
-</mat-grid-list>
+          {{ recipe.title }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <mat-spinner
+      [color]="spinnerColor"
+      [diameter]="30"
+      [ngClass]="{ visible: loading, hidden: !loading }"
+      [strokeWidth]="2"
+      [mode]="'indeterminate'"
+      style="margin: 5px;"
+    >
+    </mat-spinner>
+  </div>
+</form>
+<nutrition-recipe-info></nutrition-recipe-info>
