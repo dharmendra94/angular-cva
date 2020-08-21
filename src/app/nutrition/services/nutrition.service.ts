@@ -21,27 +21,14 @@ export class NutritionService {
   ): Observable<RecipeAutocomplete[]> {
     return this.httpClient
       .get<RecipeAutocomplete[]>(
-        `${this.api}recipes/autocomplete?query=${query}&number=${records}`,
-        {
-          headers: {
-            'x-rapidapi-host': this.apiHost,
-            'x-rapidapi-key': this.apiKey,
-            useQueryString: 'true',
-          },
-        }
+        `${this.api}recipes/autocomplete?query=${query}&number=${records}`
       )
       .pipe(catchError((error) => of([])));
   }
 
   getRecipeInfo(recipeId: number): Observable<RecipeInfo> {
     return this.httpClient
-      .get<RecipeInfo>(`${this.api}recipes/${recipeId}/information`, {
-        headers: {
-          'x-rapidapi-host': this.apiHost,
-          'x-rapidapi-key': this.apiKey,
-          useQueryString: 'true',
-        },
-      })
+      .get<RecipeInfo>(`${this.api}recipes/${recipeId}/information`)
       .pipe(catchError((error) => of({} as RecipeInfo)));
   }
 }

@@ -4,4 +4,17 @@
   background: #fff;
   border-top: #e0e0e0;
   padding: 15px;
+  height: 89vh;
+  overflow: auto;
+}
+
+.heading {
+  font-weight: 450;
+}
+
+p {
+  cursor: not-allowed;
+  text-decoration: none;
+  color: black;
+  pointer-events: none;
 }

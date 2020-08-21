@@ -5,10 +5,11 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FinanceService } from './services/finance.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoaderComponent } from './loader/loader.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { HeadersInterceptorInterceptor } from './http-interceptors/headers-interceptor.interceptor';
 
 @NgModule({
   declarations: [AppComponent, LoaderComponent],
@@ -21,7 +22,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     BrowserAnimationsModule,
     MatProgressBarModule,
   ],
-  providers: [FinanceService],
+  providers: [
+    FinanceService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HeadersInterceptorInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

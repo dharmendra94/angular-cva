@@ -47,7 +47,7 @@ export class NutritionComponent implements OnInit {
   onRecipeSelect(selectedEvent: MatAutocompleteSelectedEvent): void {
     const selectedRecipe: RecipeAutocomplete = selectedEvent.option.value;
     this.isInitial = false;
-    // this.getRecipeInfo(selectedRecipe.id);
+    this.getRecipeInfo(selectedRecipe.id);
   }
 
   private onRecipeAutoCompleteValueChange(): void {
