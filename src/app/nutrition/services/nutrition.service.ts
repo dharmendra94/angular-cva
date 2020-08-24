@@ -5,13 +5,12 @@ import { RecipeAutocomplete } from '../models/recipe-autocomplete';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { RecipeInfo } from '../models/recipe-info';
-import { hostViewClassName } from '@angular/compiler';
 
 @Injectable()
 export class NutritionService {
   private readonly api: string = environment.apiUrl;
-  private readonly apiHost: string = environment.nutritionApiHost;
-  private readonly apiKey: string = environment.nutritionServiceKey;
+  // private readonly apiHost: string = environment.nutritionApiHost;
+  // private readonly apiKey: string = environment.nutritionServiceKey;
 
   constructor(private httpClient: HttpClient) {}
 
